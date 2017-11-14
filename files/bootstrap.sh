@@ -13,7 +13,7 @@ chmod 600 /root/.ssh/authorized_keys
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 
-cp -f /files/.gitignore /.gitignore
+cp -f /files/gitignore /.gitignore
 cp -f /files/vimrc /root/.vimrc
 
 cat << EOF >> /etc/sudoers
