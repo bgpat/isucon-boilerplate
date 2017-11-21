@@ -15,6 +15,7 @@ git config --global user.name "Your Name"
 
 cp -f /files/gitignore /.gitignore
 cp -f /files/vimrc /root/.vimrc
+cp -f /files/vimrc /home/isucon/.vimrc
 
 cat << EOF >> /etc/sudoers
 
