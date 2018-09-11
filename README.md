@@ -9,7 +9,7 @@ cd /
 git init
 git remote add origin https://github.com/bgpat/isucon-boilerplate
 git fetch origin master
-git reset --hard remotes/origin/master
+git reset --hard FETCH_HEAD
 /files/bootstrap.sh bgpat owlworks Goryudyuma
 ```
 
