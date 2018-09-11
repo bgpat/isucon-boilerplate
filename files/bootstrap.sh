@@ -24,3 +24,4 @@ Defaults	env_keep+="GIT_AUTHOR_EMAIL"
 EOF
 
 echo 'PermitUserEnvironment yes' >> /etc/ssh/sshd_config
+sshd -t && systemctl restart sshd
