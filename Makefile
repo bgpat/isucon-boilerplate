@@ -19,6 +19,7 @@ ssh: /root/.ssh/authorized_keys /root/.ssh/id_rsa sshd
 .PHONY: sshd
 sshd: /etc/sudoers /etc/ssh/sshd_config
 
+.PHONY: /etc/sudoers
 /etc/sudoers: /etc/sudoers.bak
 	echo 'Defaults	env_keep+="GIT_AUTHOR_NAME"' >> $@
 	echo 'Defaults	env_keep+="GIT_AUTHOR_EMAIL"' >> $@
@@ -26,6 +27,7 @@ sshd: /etc/sudoers /etc/ssh/sshd_config
 /etc/sudoers.bak:
 	cp -p /etc/sudoers $@
 
+.PHONY: /etc/ssh/sshd_config
 /etc/ssh/sshd_config: /etc/ssh/sshd_config.bak
 	echo 'PermitUserEnvironment yes' >> /etc/ssh/sshd_config
 	sshd -t
