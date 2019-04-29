@@ -17,6 +17,12 @@ all: git ssh
 
 .PHONY: git
 git: /.gitignore /root/.vimrc /home/isucon/.vimrc /root/.gitconfig
+	git remote get-url origin \
+	| grep '^https://' \
+	&& git remote get-url origin \
+	| sed -r 's_^https://github.com/([a-zA-Z0-9_-]*/[a-zA-Z0-9_-]*).*$_git@github.com:\1.git_' \
+	| xargs git remote set-url origin \
+	|| true
 
 .PHONY: ssh
 ssh: /root/.ssh/authorized_keys /root/.ssh/id_rsa sshd
