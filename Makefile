@@ -9,11 +9,12 @@ endef
 
 .PHONY: all
 all: git ssh
-	@echo "\n"
-	echo -e "Open \e[4mhttps://github.com/$(\
+	@clear
+	@echo "Open \e[4mhttps://github.com/$(\
 		git remote get-url origin | sed -r 's/^.*?:(.*)\.git$/\1/' \
-	)/settings/keys/new\e[0m and paste pubkey:\n"↲
+	)/settings/keys/new\e[0m and paste pubkey:\n"
 	@cat /root/.ssh/id_rsa.pub
+	@echo
 
 .PHONY: git
 git: /.gitignore /root/.vimrc /home/isucon/.vimrc /root/.gitconfig
