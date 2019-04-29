@@ -11,10 +11,10 @@ endef
 all: git ssh
 
 .PHONY: git
-git: /.gitignore /root/.vimrc /home/isucon/.vimrc /root/.ssh/id_rsa /root/.gitconfig
+git: /.gitignore /root/.vimrc /home/isucon/.vimrc /root/.gitconfig
 
 .PHONY: ssh
-ssh: /root/.ssh/authorized_keys sshd
+ssh: /root/.ssh/authorized_keys /root/.ssh/id_rsa sshd
 
 .PHONY: sshd
 sshd: /etc/sudoers /etc/ssh/sshd_config
