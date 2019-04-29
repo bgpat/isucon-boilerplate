@@ -39,7 +39,7 @@ sshd: /etc/sudoers /etc/ssh/sshd_config
 
 .PHONY: clean
 clean:
-	rm -rf /root/.ssh /.git /.gitignore /root/.vimrc /home/isucon/.vimrc /root/.ssh/id_rsa /root/.gitconfig
+	rm -rf /root/.ssh /.gitignore /root/.vimrc /home/isucon/.vimrc /root/.ssh/id_rsa /root/.gitconfig
 	test -e /etc/sudoers.bak && cp -fp /etc/sudoers.bak /etc/sudoers
 	test -e /etc/ssh/sshd_config.bak && cp -fp /etc/ssh/sshd_config.bak /etc/ssh/sshd_config
 
