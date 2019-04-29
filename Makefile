@@ -30,6 +30,7 @@ sshd: /etc/sudoers /etc/ssh/sshd_config
 .PHONY: /etc/ssh/sshd_config
 /etc/ssh/sshd_config: /etc/ssh/sshd_config.bak
 	echo 'PermitUserEnvironment yes' >> /etc/ssh/sshd_config
+	echo 'PermitRootLogin without-password' >> /etc/ssh/sshd_config
 	sshd -t
 	systemctl reload sshd
 
