@@ -9,6 +9,11 @@ endef
 
 .PHONY: all
 all: git ssh
+	@echo "\n"
+	echo -e "Open \e[4mhttps://github.com/$(\
+		git remote get-url origin | sed -r 's/^.*?:(.*)\.git$/\1/' \
+	)/settings/keys/new\e[0m and paste pubkey:\n"↲
+	@cat /root/.ssh/id_rsa.pub
 
 .PHONY: git
 git: /.gitignore /root/.vimrc /home/isucon/.vimrc /root/.gitconfig
@@ -63,7 +68,6 @@ clean:
 
 /root/.ssh/id_rsa: /root/.ssh
 	yes | ssh-keygen -f $@ -t rsa -N "" -b 4096 > /dev/null
-	cat $@.pub
 
 /root/.gitconfig:
 	git config --global user.email "anonymous@example.com"
