@@ -4,10 +4,12 @@
 
 ### initialize
 
+Replace `$GITHUB_REPO_URL` and execute the following commands in the competition machine.
+
 ```bash
 cd /
 git init
-git remote add origin https://github.com/bgpat/isucon-boilerplate.git
+git remote add origin $GITHUB_REPO_URL
 git fetch origin master
 git reset --hard FETCH_HEAD
 make
