@@ -40,7 +40,7 @@ sshd: /etc/sudoers /etc/ssh/sshd_config
 	cp -p /etc/sudoers $@
 
 .PHONY: /etc/ssh/sshd_config
-/etc/ssh/sshd_config: /etc/ssh/sshd_config.bak
+/etc/ssh/sshd_config: /etc/ssh/sshd_config.bak ssh_host_key
 	sed -i '/^PermitRootLogin no/d' $@
 	echo 'PermitUserEnvironment yes' >> $@
 	echo 'PermitRootLogin without-password' >> $@
@@ -79,3 +79,7 @@ clean:
 /root/.gitconfig:
 	git config --global user.email "anonymous@example.com"
 	git config --global user.name "anonymous"
+
+.PHONY: ssh_host_key
+ssh_host_key:
+	ssh-keygen -A
