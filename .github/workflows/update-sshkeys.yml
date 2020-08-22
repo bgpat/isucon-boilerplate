@@ -7,12 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - name: ensure ssh directory
+      run: mkdir -p root/.ssh
     - name: replace ssh keys
       uses: actions/github-script@v3
       with:
         script: |
           require("fs").writeFileSync(
-            "files/authorized_keys",
+            "root/.ssh/authorized_keys",
             [
               ...(await Promise.all(
                 await github.repos.listCollaborators(context.repo).then((resp) =>
