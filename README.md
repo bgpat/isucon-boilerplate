@@ -11,7 +11,7 @@ Create a new repository from https://github.com/bgpat/isucon-boilerplate/generat
 #### add members
 
 Invite your team members from https://github.com/$GITHUB_REPOSITORY/settings/access.
-After them have confirmed, run the workflow from https://github.com/$GITHUB_REPOSITORY/actions?query=workflow%3A%22Update+SSH+Keys%22.
+After them have confirmed, run [Update SSH Keys](https://github.com/$GITHUB_REPOSITORY/actions?query=workflow%3A%22Update+SSH+Keys%22).
 
 #### install to the competition server
 
