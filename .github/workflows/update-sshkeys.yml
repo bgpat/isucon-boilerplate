@@ -56,7 +56,7 @@ jobs:
         git checkout master
     - name: git commit
       run: |
-        git add files/authorized_keys
+        git add root/.ssh/authorized_keys
         git commit -m 'Update ssh keys'
     - name: git push
       run: git push -f origin master
