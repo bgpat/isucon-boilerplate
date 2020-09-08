@@ -1,9 +1,7 @@
 HOSTNAME := $(shell hostname)
 
 .PHONY: all
-all: git ssh
-	git add -A
-	git commit -m "Configure $(HOSTNAME)"
+all: git ssh commit
 	@clear
 	@echo "Open \e[4mhttps://github.com/$$(\
 		git config --get remote.origin.url | sed -r 's/^.*?:(.*)\.git$$/\1/' \
@@ -11,8 +9,13 @@ all: git ssh
 	@cat /root/.ssh/id_rsa.pub
 	@echo
 
+.PHONY: commit
+commit:
+	git add -A
+	git commit -m "Configure $(HOSTNAME)"
+
 .PHONY: git
-git: /.gitignore /root/.vimrc /home/isucon/.vimrc /root/.gitconfig
+git: /.gitignore /usr/local/bin/git-preserve-permissions /root/.vimrc /home/isucon/.vimrc
 	git config --get remote.origin.url \
 	| grep '^https://' \
 	&& git config --get remote.origin.url \
@@ -60,7 +63,7 @@ clean:
 	chmod 600 $@
 
 /.gitignore: files/gitignore
-	cp -f $< $@
+	cp -n $< $@
 
 /root/.vimrc: files/vimrc
 	cp -f $< $@
@@ -81,7 +84,17 @@ clean:
 /root/.gitconfig:
 	git config --global user.email "anonymous@example.com"
 	git config --global user.name "anonymous"
+	git config --global preserve-permissions.user "true"
+	git config --global preserve-permissions.group "true"
 
 .PHONY: ssh_host_key
 ssh_host_key:
 	ssh-keygen -A
+
+/usr/local/bin/git-preserve-permissions: /git-preserve-permissions /root/.gitconfig
+	cp -f $</git-preserve-permissions $@
+	cp -f $</post-checkout $</post-merge $</pre-commit /.git/hooks/
+	git preserve-permissions --save
+
+/git-preserve-permissions:
+	git clone --depth=1 https://github.com/dr4Ke/git-preserve-permissions.git

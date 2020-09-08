@@ -26,6 +26,8 @@ git reset --hard FETCH_HEAD
 make
 ```
 
+Add deploy key and run `git push -u origin master`.
+
 ### edit config file
 
 ```bash
