@@ -94,7 +94,7 @@ ssh_host_key:
 /usr/local/bin/git-preserve-permissions: /git-preserve-permissions /root/.gitconfig
 	cp -f $</git-preserve-permissions $@
 	cp -f $</post-checkout $</post-merge $</pre-commit /.git/hooks/
-	git preserve-permissions --save
+	-git preserve-permissions --save
 
 /git-preserve-permissions:
 	git clone --depth=1 https://github.com/dr4Ke/git-preserve-permissions.git
