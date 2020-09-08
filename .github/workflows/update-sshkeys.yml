@@ -1,6 +1,11 @@
 name: Update SSH Keys
 on:
   workflow_dispatch:
+  push:
+    branches:
+    - master
+    paths:
+    - files/hosts/*_pubkey
 jobs:
   update-sshkeys:
     name: update-sshkeys
@@ -48,6 +53,8 @@ jobs:
               "",
             ].join("\n")
           );
+    - name: add host keys
+      run: cat files/hosts/*_pubkey >> root/.ssh/authorized_keys || true
     - name: config git
       run: |
         git config user.name $GITHUB_ACTOR
@@ -56,7 +63,7 @@ jobs:
         git checkout master
     - name: git commit
       run: |
-        git add root/.ssh/authorized_keys
+        git add -f root/.ssh/authorized_keys
         git commit -m 'Update ssh keys'
     - name: git push
       run: git push -f origin master

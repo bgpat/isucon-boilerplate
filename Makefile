@@ -1,5 +1,9 @@
+HOSTNAME := $(shell hostname)
+
 .PHONY: all
 all: git ssh
+	git add -A
+	git commit -m "Configure $(HOSTNAME)"
 	@clear
 	@echo "Open \e[4mhttps://github.com/$$(\
 		git config --get remote.origin.url | sed -r 's/^.*?:(.*)\.git$$/\1/' \
@@ -17,7 +21,7 @@ git: /.gitignore /root/.vimrc /home/isucon/.vimrc /root/.gitconfig
 	|| true
 
 .PHONY: ssh
-ssh: /root/.ssh/authorized_keys /root/.ssh/id_rsa sshd
+ssh: /root/.ssh/authorized_keys /files/hosts/$(HOSTNAME)_pubkey sshd
 
 .PHONY: sshd
 sshd: /etc/sudoers /etc/ssh/sshd_config
@@ -52,6 +56,7 @@ clean:
 	chmod 700 /root/.ssh
 
 /root/.ssh/authorized_keys: /root/.ssh
+	touch $@
 	chmod 600 $@
 
 /.gitignore: files/gitignore
@@ -65,6 +70,13 @@ clean:
 
 /root/.ssh/id_rsa: /root/.ssh
 	yes | ssh-keygen -f $@ -t rsa -N "" -b 4096 > /dev/null
+
+/root/.ssh/id_rsa.pub: /root/.ssh/id_rsa
+
+/files/hosts/$(HOSTNAME)_pubkey: /root/.ssh/id_rsa.pub
+	mkdir -p /files/hosts
+	cp -f $< $@
+	git add -f $@
 
 /root/.gitconfig:
 	git config --global user.email "anonymous@example.com"
