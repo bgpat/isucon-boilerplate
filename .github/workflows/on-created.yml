@@ -18,7 +18,7 @@ jobs:
         git checkout master
     - name: replace
       run: |
-        sed -i "s/isucon-boilerplate/${GITHUB_REPOSITORY#*/}/" README.md
+        sed -i "s/ isucon-boilerplate/ ${GITHUB_REPOSITORY#*/}/" README.md
         sed -i "s!\\\$GITHUB_REPOSITORY!${GITHUB_REPOSITORY}!" README.md
         sed -i 's/create a new repository/~\0~ already done/' README.md
     - name: commit
