@@ -61,6 +61,7 @@ clean:
 /root/.ssh/authorized_keys: /root/.ssh
 	touch $@
 	chmod 600 $@
+	git add -f $@
 
 /.gitignore: files/gitignore
 	cp -n $< $@
@@ -103,7 +104,7 @@ ssh_host_key:
 	mkdir -p $@
 
 /home/isucon/.bashrc: /home/isucon/.bashrc.bakup
-ifeq ($(shell git status --ignored --short /home/isucon/.bashrc),!! /home/isucon/.bashrc)
+ifeq ($(shell git status --ignored --short /home/isucon/.bashrc),!! home/isucon/.bashrc)
 	/files/gitignore.sh $@
 	echo 'alias git="sudo git"' >> $@
 	git add -f $@
