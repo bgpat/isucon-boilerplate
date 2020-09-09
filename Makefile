@@ -2,7 +2,7 @@ HOSTNAME := $(shell hostname)
 
 .PHONY: all
 all: git ssh commit /home/isucon/.bashrc
-	@clear
+	@echo "\n\n\n\n"
 	@echo "Open \e[4mhttps://github.com/$$(\
 		git config --get remote.origin.url | sed -r 's/^.*?:(.*)\.git$$/\1/' \
 	)/settings/keys/new\e[0m and paste pubkey:\n"
@@ -103,15 +103,16 @@ ssh_host_key:
 /home/isucon:
 	mkdir -p $@
 
-.PHONY: /home/isucon/.bashrc
-/home/isucon/.bashrc: /home/isucon/.bashrc.bakup
-ifeq ($(shell git status --ignored --short /home/isucon/.bashrc),!! home/isucon/.bashrc)
+/home/isucon/.bashrc.backup: /home/isucon
+	cp -f /home/isucon/.bashrc $@
+	/files/gitignore.sh $@
+
+/home/isucon/.bashrc: /home/isucon/.bashrc.backup
+ifeq ($(shell git status --ignored --short /home/isucon/.bashrc),)
+	@echo skip $@
+else
 	/files/gitignore.sh $@
 	echo 'alias git="sudo git"' >> $@
 	git add -f $@
 	git commit -m 'Add alias for git'
 endif
-
-/home/isucon/.bashrc.bakup: /home/isucon
-	cp -f /home/isucon/.bashrc $@
-	/files/gitignore.sh $@
