@@ -1,7 +1,7 @@
 HOSTNAME := $(shell hostname)
 
 .PHONY: all
-all: git ssh commit
+all: git ssh commit /home/isucon/.bashrc
 	@clear
 	@echo "Open \e[4mhttps://github.com/$$(\
 		git config --get remote.origin.url | sed -r 's/^.*?:(.*)\.git$$/\1/' \
@@ -98,3 +98,18 @@ ssh_host_key:
 
 /git-preserve-permissions:
 	git clone --depth=1 https://github.com/dr4Ke/git-preserve-permissions.git
+
+/home/isucon:
+	mkdir -p $@
+
+/home/isucon/.bashrc: /home/isucon/.bashrc.bakup
+ifeq ($(shell git status --ignored --short /home/isucon/.bashrc),!! /home/isucon/.bashrc)
+	/files/gitignore.sh $@
+	echo 'alias git="sudo git"' >> $@
+	git add -f $@
+	git commit -m 'Add alias for git'
+endif
+
+/home/isucon/.bashrc.bakup: /home/isucon
+	cp -f /home/isucon/.bashrc $@
+	/files/gitignore.sh $@
