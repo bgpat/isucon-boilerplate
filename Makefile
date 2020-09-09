@@ -103,6 +103,7 @@ ssh_host_key:
 /home/isucon:
 	mkdir -p $@
 
+.PHONY: /home/isucon/.bashrc
 /home/isucon/.bashrc: /home/isucon/.bashrc.bakup
 ifeq ($(shell git status --ignored --short /home/isucon/.bashrc),!! home/isucon/.bashrc)
 	/files/gitignore.sh $@
