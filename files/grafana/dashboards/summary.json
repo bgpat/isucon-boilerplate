@@ -1113,7 +1113,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Storage ($hostname)",
+      "title": "Free Storage ($hostname)",
       "transformations": [],
       "type": "stat"
     },
