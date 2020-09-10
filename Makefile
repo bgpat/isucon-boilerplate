@@ -116,3 +116,33 @@ else
 	git add -f $@
 	git commit -m 'Add alias for git'
 endif
+
+.PHONY: monitoring
+monitoring: prometheus node_exporter process-exporter
+
+.PHONY: prometheus
+prometheus: /usr/local/bin/prometheus
+	nohup $@ --config.file=/etc/prometheus/prometheus.yml &
+
+/usr/local/bin/prometheus:
+	curl -sL https://github.com/prometheus/prometheus/releases/download/v2.21.0-rc.1/prometheus-2.21.0-rc.1.linux-amd64.tar.gz | tar xzv --strip-components 1 -C /usr/local/bin/ prometheus-2.21.0-rc.1.linux-amd64/prometheus
+
+.PHONY: node_exporter
+node_exporter: /usr/local/bin/node_exporter
+	nohup $@ &
+
+/usr/local/bin/node_exporter:
+	curl -sL https://github.com/prometheus/node_exporter/releases/download/v1.0.1/node_exporter-1.0.1.linux-amd64.tar.gz | tar xzv --strip-components 1 -C /usr/local/bin/ node_exporter-1.0.1.linux-amd64/node_exporter
+
+.PHONY: process-exporter
+process-exporter: /usr/local/bin/process-exporter /etc/process-exporter/all.yaml
+	nohup $@ -config.path /etc/process-exporter/all.yaml &
+
+/usr/local/bin/process-exporter:
+	curl -sL https://github.com/ncabatoff/process-exporter/releases/download/v0.7.2/process-exporter-0.7.2.linux-amd64.tar.gz | tar xzv --strip-components 1 -C /usr/local/bin/ process-exporter-0.7.2.linux-amd64/process-exporter
+
+/etc/process-exporter/all.yaml: /etc/process-exporter
+	curl -sL https://raw.githubusercontent.com/ncabatoff/process-exporter/v0.7.2/packaging/conf/all.yaml > $@
+
+/etc/process-exporter:
+	mkdir -p $@
