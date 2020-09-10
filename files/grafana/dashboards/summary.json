@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1599765127884,
+  "iteration": 1599765169430,
   "links": [],
   "panels": [
     {
@@ -130,7 +130,7 @@
       },
       "pluginVersion": "7.1.5",
       "repeat": null,
-      "repeatIteration": 1599765127884,
+      "repeatIteration": 1599765169430,
       "repeatPanelId": 39,
       "scopedVars": {
         "hostname": {
@@ -199,7 +199,7 @@
       },
       "pluginVersion": "7.1.5",
       "repeat": null,
-      "repeatIteration": 1599765127884,
+      "repeatIteration": 1599765169430,
       "repeatPanelId": 39,
       "scopedVars": {
         "hostname": {
@@ -374,7 +374,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1599765127884,
+      "repeatIteration": 1599765169430,
       "repeatPanelId": 2,
       "scopedVars": {
         "hostname": {
@@ -482,7 +482,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1599765127884,
+      "repeatIteration": 1599765169430,
       "repeatPanelId": 2,
       "scopedVars": {
         "hostname": {
@@ -710,7 +710,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1599765127884,
+      "repeatIteration": 1599765169430,
       "repeatPanelId": 5,
       "scopedVars": {
         "hostname": {
@@ -832,7 +832,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1599765127884,
+      "repeatIteration": 1599765169430,
       "repeatPanelId": 5,
       "scopedVars": {
         "hostname": {
@@ -1067,7 +1067,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1599765127884,
+      "repeatIteration": 1599765169430,
       "repeatPanelId": 10,
       "scopedVars": {
         "hostname": {
@@ -1182,7 +1182,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1599765127884,
+      "repeatIteration": 1599765169430,
       "repeatPanelId": 10,
       "scopedVars": {
         "hostname": {
@@ -1307,17 +1307,17 @@
       },
       "targets": [
         {
-          "expr": "node_filesystem_free_bytes{hostname=~\"$hostname\"}",
+          "expr": "node_filesystem_avail_bytes{hostname=~\"$hostname\"}",
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{device}}",
+          "legendFormat": "{{device}} ({{mountpoint}})",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Free Storage ($hostname)",
+      "title": "Free Space ($hostname)",
       "transformations": [],
       "type": "stat"
     },
@@ -1367,7 +1367,7 @@
       "pluginVersion": "7.1.5",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1599765127884,
+      "repeatIteration": 1599765169430,
       "repeatPanelId": 17,
       "scopedVars": {
         "hostname": {
@@ -1438,7 +1438,7 @@
       "pluginVersion": "7.1.5",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1599765127884,
+      "repeatIteration": 1599765169430,
       "repeatPanelId": 17,
       "scopedVars": {
         "hostname": {
@@ -1605,7 +1605,7 @@
       "points": false,
       "renderer": "flot",
       "repeat": null,
-      "repeatIteration": 1599765127884,
+      "repeatIteration": 1599765169430,
       "repeatPanelId": 27,
       "scopedVars": {
         "hostname": {
@@ -1708,7 +1708,7 @@
       "points": false,
       "renderer": "flot",
       "repeat": null,
-      "repeatIteration": 1599765127884,
+      "repeatIteration": 1599765169430,
       "repeatPanelId": 27,
       "scopedVars": {
         "hostname": {
@@ -1781,7 +1781,6 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "All"
           ],
@@ -1853,5 +1852,5 @@
   "timezone": "",
   "title": "Summary",
   "uid": "RlJjgevMk",
-  "version": 8
+  "version": 10
 }
