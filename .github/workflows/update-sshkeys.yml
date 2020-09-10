@@ -5,7 +5,7 @@ on:
     branches:
     - master
     paths:
-    - files/hosts/*_pubkey
+    - files/pubkey/*
 jobs:
   update-sshkeys:
     name: update-sshkeys
@@ -54,7 +54,7 @@ jobs:
             ].join("\n")
           );
     - name: add host keys
-      run: cat files/hosts/*_pubkey >> root/.ssh/authorized_keys || true
+      run: cat files/pubkey/* >> root/.ssh/authorized_keys || true
     - name: config git
       run: |
         git config user.name $GITHUB_ACTOR
