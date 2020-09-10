@@ -1,7 +1,7 @@
 HOSTNAME := $(shell hostname)
 
 .PHONY: all
-all: git ssh commit /home/isucon/.bashrc
+all: git ssh commit /home/isucon/.bashrc /files/hosts/$(HOSTNAME)
 	@echo "\n\n\n\n"
 	@echo "Open \e[4mhttps://github.com/$$(\
 		git config --get remote.origin.url | sed -r 's/^.*?:(.*)\.git$$/\1/' \
@@ -24,7 +24,7 @@ git: /.gitignore /usr/local/bin/git-preserve-permissions /root/.vimrc /home/isuc
 	|| true
 
 .PHONY: ssh
-ssh: /root/.ssh/authorized_keys /files/hosts/$(HOSTNAME)_pubkey sshd
+ssh: /root/.ssh/authorized_keys /files/pubkey/$(HOSTNAME) sshd
 
 .PHONY: sshd
 sshd: /etc/sudoers /etc/ssh/sshd_config
@@ -77,8 +77,8 @@ clean:
 
 /root/.ssh/id_rsa.pub: /root/.ssh/id_rsa
 
-/files/hosts/$(HOSTNAME)_pubkey: /root/.ssh/id_rsa.pub
-	mkdir -p /files/hosts
+/files/pubkey/$(HOSTNAME): /root/.ssh/id_rsa.pub
+	mkdir -p /files/pubkey
 	cp -f $< $@
 	git add -f $@
 
@@ -117,11 +117,18 @@ else
 	git commit -m 'Add alias for git'
 endif
 
+/files/hosts/$(HOSTNAME):
+	mkdir -p /files/hosts
+	echo "$(shell hostname -s) $(shell hostname -i)" > $@
+	-git add -f $@
+	-git commit -m 'Add host'
+
 .PHONY: monitoring
 monitoring: prometheus node_exporter process-exporter
 
 .PHONY: prometheus
 prometheus: /usr/local/bin/prometheus
+	-pkill $@
 	nohup $@ --config.file=/etc/prometheus/prometheus.yml &
 
 /usr/local/bin/prometheus:
@@ -129,6 +136,7 @@ prometheus: /usr/local/bin/prometheus
 
 .PHONY: node_exporter
 node_exporter: /usr/local/bin/node_exporter
+	-pkill $@
 	nohup $@ &
 
 /usr/local/bin/node_exporter:
@@ -136,6 +144,7 @@ node_exporter: /usr/local/bin/node_exporter
 
 .PHONY: process-exporter
 process-exporter: /usr/local/bin/process-exporter /etc/process-exporter/all.yaml
+	-pkill $@
 	nohup $@ -config.path /etc/process-exporter/all.yaml &
 
 /usr/local/bin/process-exporter:
@@ -146,3 +155,17 @@ process-exporter: /usr/local/bin/process-exporter /etc/process-exporter/all.yaml
 
 /etc/process-exporter:
 	mkdir -p $@
+
+.PHONY: grafana-server
+grafana-server: /usr/local/bin/grafana-server
+	-pkill $@
+	GF_AUTH_ANONYMOUS_ENABLED=true GF_AUTH_ANONYMOUS_ORG_ROLE=Admin nohup $@ -homepath /opt/grafana &
+
+/usr/local/bin/grafana-server: /opt/grafana
+	ln -sf $</bin/grafana-server $@
+
+/opt/grafana:
+	mkdir -p $@
+	curl -sL https://dl.grafana.com/oss/release/grafana-7.1.5.linux-amd64.tar.gz | tar xzv --strip-components 1 -C $@
+	cp -f /files/grafana/datasources.yml $@/conf/provisioning/datasources/datasources.yml
+	cp -f /files/grafana/dashboards.yml $@/conf/provisioning/dashboards/dashboards.yml
