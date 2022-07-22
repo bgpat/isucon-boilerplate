@@ -66,6 +66,8 @@ jobs:
         git add -f root/.ssh/authorized_keys
         git commit -m 'Update ssh keys'
     - name: git push
-      run: git push -f origin master
+      run: |
+        git pull origin master
+        git push origin master
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
