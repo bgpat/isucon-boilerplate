@@ -29,7 +29,7 @@ Run following commands in the each competition server:
 ```bash
 cd /
 git init
-git remote add origin https://github.com/$GITHUB_REPOSITORY.git
+git remote add origin git@github.com:bgpat/$GITHUB_REPOSITORY.git
 git fetch origin master
 git reset --hard FETCH_HEAD
 make
