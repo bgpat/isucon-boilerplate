@@ -13,6 +13,15 @@ Create a new repository from https://github.com/bgpat/isucon-boilerplate/generat
 Invite your team members from https://github.com/$GITHUB_REPOSITORY/settings/access.
 After them have confirmed, run [Update SSH Keys](https://github.com/$GITHUB_REPOSITORY/actions?query=workflow%3A%22Update+SSH+Keys%22).
 
+#### generate and register ssh deploy key
+
+```bash
+ssh-keygen -t rsa
+cat ~/.ssh/id_rsa.pub
+```
+
+Copy the result and register as a [deploy key](https://github.com/bgpat/isucon-boilerplate/settings/keys/new).
+
 #### install to the competition server
 
 Run following commands in the each competition server:
