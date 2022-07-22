@@ -17,7 +17,10 @@ After them have confirmed, run [Update SSH Keys](https://github.com/$GITHUB_REPO
 
 ```bash
 ssh-keygen -t rsa
+cat ~/.ssh/id_rsa.pub
 ```
+
+Copy the result and register as a [deploy key](https://github.com/bgpat/isucon-boilerplate/settings/keys/new).
 
 #### install to the competition server
 
