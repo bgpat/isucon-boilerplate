@@ -33,10 +33,17 @@ git remote add origin git@github.com:$GITHUB_REPOSITORY.git
 git fetch origin master
 git reset --hard FETCH_HEAD
 make
-git push -u origin master
 ```
 
 Add deploy key and run `git push -u origin master`.
+
+### run monitoring servers
+
+```bash
+make monitoring
+```
+
+Access to 3999 port from your browser.
 
 ### edit config file
 
