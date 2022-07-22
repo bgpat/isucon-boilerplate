@@ -159,7 +159,7 @@ process-exporter: /usr/local/bin/process-exporter /etc/process-exporter/all.yaml
 .PHONY: grafana-server
 grafana-server: /usr/local/bin/grafana-server
 	-pkill $@
-	GF_AUTH_ANONYMOUS_ENABLED=true GF_AUTH_ANONYMOUS_ORG_ROLE=Admin nohup $@ -homepath /opt/grafana &
+	GF_SERVER_HTTP_PORT=3999 GF_AUTH_ANONYMOUS_ENABLED=true GF_AUTH_ANONYMOUS_ORG_ROLE=Admin nohup $@ -homepath /opt/grafana &
 
 /usr/local/bin/grafana-server: /opt/grafana
 	ln -sf $</bin/grafana-server $@
