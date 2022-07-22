@@ -124,7 +124,7 @@ endif
 	-git commit -m 'Add host'
 
 .PHONY: monitoring
-monitoring: prometheus node_exporter process-exporter
+monitoring: prometheus node_exporter process-exporter grafana-server
 
 .PHONY: prometheus
 prometheus: /usr/local/bin/prometheus
