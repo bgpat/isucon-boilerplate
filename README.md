@@ -26,7 +26,7 @@ ssh-keygen -t rsa
 cat ~/.ssh/id_rsa.pub
 ```
 
-Copy the result and register as a [deploy key](https://github.com/bgpat/isucon-boilerplate/settings/keys/new).
+Copy the result and register as a [deploy key](https://github.com/$GITHUB_REPOSITORY/settings/keys/new).
 
 **install**
 
@@ -60,3 +60,4 @@ vim /etc/nginx/nginx.conf
 ```bash
 git add -f *.go
 ```
+
