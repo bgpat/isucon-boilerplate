@@ -73,7 +73,7 @@ clean:
 	cp -f $< $@
 
 /root/.ssh/id_rsa: /root/.ssh
-	yes | ssh-keygen -f $@ -t rsa -N "" -b 4096 > /dev/null
+	test -f $@ || yes | ssh-keygen -f $@ -t rsa -N "" -b 4096 > /dev/null
 
 /root/.ssh/id_rsa.pub: /root/.ssh/id_rsa
 
