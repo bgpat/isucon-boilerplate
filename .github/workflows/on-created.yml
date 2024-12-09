@@ -7,7 +7,7 @@ jobs:
   on-created:
     name: on-created
     runs-on: ubuntu-latest
-    if: ${{ github.repository != 'bgpat/isucon-boilerplate' }}
+    if: ${{ github.repository != 'dbgofy/isucon-boilerplate' }}
     steps:
     - uses: actions/checkout@v1
     - name: config git
