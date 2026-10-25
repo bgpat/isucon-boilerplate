@@ -33,7 +33,7 @@ jobs:
                   username: collaborator.login,
                 });
                 return publicKeys.data.map(({ key }) => {
-                  const env = `environment="GIT_AUTHOR_NAME=${collaborator.login},GIT_AUTHOR_EMAIL=${email}"`;
+                  const env = `environment="GIT_AUTHOR_NAME=${collaborator.login}",environment="GIT_AUTHOR_EMAIL=${email}"`;
                   return `${env} ${key}`;
                 });
               })
