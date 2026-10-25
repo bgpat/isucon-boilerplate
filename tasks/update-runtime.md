@@ -45,7 +45,6 @@ for s in "${SERVERS[@]}"; do
   ssh "$s" 'bash -s' <<'EOF'
 hostname
 command -v go && go version
-command -v python3 && python3 --version
 command -v node && node -v
 command -v ruby && ruby -v
 command -v php && php -v | head -n 1

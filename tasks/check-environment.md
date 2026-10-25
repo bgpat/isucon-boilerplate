@@ -55,7 +55,6 @@ mysql --version 2>/dev/null || mariadb --version 2>/dev/null || true
 redis-server --version 2>/dev/null || true
 go version 2>/dev/null || true
 node -v 2>/dev/null || true
-python3 --version 2>/dev/null || true
 ruby -v 2>/dev/null || true
 php -v 2>/dev/null | head -n 1 || true
 java -version 2>&1 | head -n 1 || true

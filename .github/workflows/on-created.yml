@@ -33,16 +33,15 @@ jobs:
         env:
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
-          python3 - <<'PY'
-          import os
-          from pathlib import Path
-          path = Path('README.md')
-          text = path.read_text()
-          text = text.replace('# isucon-boilerplate\n', '# ' + os.environ['GITHUB_REPOSITORY'].split('/')[1] + '\n', 1)
-          text = text.replace('$GITHUB_REPOSITORY', os.environ['GITHUB_REPOSITORY'])
-          text = text.replace('- [ ] Create a new repository', '- [x] Create a new repository')
-          path.write_text(text)
-          PY
+          node <<'JS'
+          const fs = require('node:fs');
+          const repository = process.env.GITHUB_REPOSITORY;
+          const text = fs.readFileSync('README.md', 'utf8')
+            .replace('# isucon-boilerplate\n', '# ' + repository.split('/')[1] + '\n')
+            .replaceAll('$GITHUB_REPOSITORY', repository)
+            .replaceAll('- [ ] Create a new repository', '- [x] Create a new repository');
+          fs.writeFileSync('README.md', text);
+          JS
           if ! git diff --quiet -- README.md; then
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
