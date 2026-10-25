@@ -584,7 +584,7 @@
                       "group": "prometheus",
                       "version": "v0",
                       "spec": {
-                        "expr": "sum by (groupname, hostname) (rate(namedprocess_namegroup_memory_bytes{hostname=~\"$hostname\"}[$__interval]))",
+                        "expr": "sum by (groupname, hostname) (namedprocess_namegroup_memory_bytes{hostname=~\"$hostname\",memtype=\"resident\"})",
                         "instant": false,
                         "interval": "",
                         "legendFormat": "{{groupname}}"
