@@ -147,9 +147,3 @@ grep -A20 '### versions' /tmp/isucon-work/env/*.txt
 - OS、言語ランタイム、ミドルウェア、アプリケーションのバージョンを記録している。
 - 不明な構成や推測を明記している。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:

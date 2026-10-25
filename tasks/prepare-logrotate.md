@@ -111,9 +111,3 @@ ssh s1 'ls -lt /var/log/archive | head; sudo tail -n 1 /var/log/nginx/access.log
 - 計測ごとにログを分けて保存できる。
 - 手順がリポジトリまたは Issue に残っている。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:

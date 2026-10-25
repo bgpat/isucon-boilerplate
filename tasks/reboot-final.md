@@ -169,9 +169,3 @@ ssh s1 'systemctl disable --now prometheus grafana-server node_exporter process-
 - 再起動直前に見えていた Web ページの内容が残っており、欠損がない。
 - 変更漏れや手動作業への依存がない。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:

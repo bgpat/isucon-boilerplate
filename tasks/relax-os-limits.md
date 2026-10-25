@@ -124,9 +124,3 @@ ssh s1 'cd / && git checkout -- /etc/ssh/sshd_config /etc/security/limits.conf; 
 - 確認した制限と変更内容が Issue に記録されている。
 - 不要な制限を外した場合でも、SSH と必要なサービスへ到達できる。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:

@@ -76,9 +76,3 @@ ssh s1 'cat /root/.ssh/id_rsa.pub'
 - 競技用に発行した不要な token が無効化されている。
 - 未実施の対象がある場合は、その理由が記録されている。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:

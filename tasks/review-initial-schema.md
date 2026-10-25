@@ -109,9 +109,3 @@ wc -l /tmp/isucon-work/schema/*.txt
 - 初期スキーマと既存インデックスの一覧がある。
 - 推測で変更対象を決めていない。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:

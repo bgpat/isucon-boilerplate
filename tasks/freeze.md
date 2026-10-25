@@ -11,7 +11,7 @@ depends_on:
 
 以降のコード変更を止め、提出用の最終状態を固定する。
 
-再起動試験は `reboot-final.md` で行う。凍結 commit は Issue の作業後の記録と、`record-contest-result.md` の GitHub Release に残す。
+再起動試験は `reboot-final.md` で行う。凍結 commit は Issue のコメントと、`record-contest-result.md` の GitHub Release に残す。
 
 # 前提条件
 
@@ -64,9 +64,3 @@ done
 - 未コミットの変更がない。
 - 凍結 commit が Issue に記録されている。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:

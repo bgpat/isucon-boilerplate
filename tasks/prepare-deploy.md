@@ -131,9 +131,3 @@ ssh s1 'cd / && git log -5 --oneline && git checkout "$PREV_COMMIT" -- path && s
 - 競技サーバー上で設定やコードを直接編集しなくても反映できる。
 - 手順と確認方法がリポジトリまたは Issue に残っている。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:

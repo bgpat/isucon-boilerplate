@@ -72,9 +72,3 @@ gh issue view "$ISSUE" --repo "$REPO" --comments
 - チーム全員が GitHub の通知を受け取れる。
 - 共有先の Issue / Pull Request が決まっている。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:

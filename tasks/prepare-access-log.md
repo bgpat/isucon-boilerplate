@@ -142,9 +142,3 @@ head /tmp/isucon-work/alp/first.txt
 - 同じ手順でアクセスログを集計できる。
 - 集計設定と、ルート定義とログを根拠にしたパス正規化が記録されている。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:

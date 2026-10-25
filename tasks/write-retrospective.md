@@ -100,9 +100,3 @@ gh release view --repo "$REPO"
 - 振り返りの公開先が記録されている。
 - 実測していないスコアや結果を書いていない。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:

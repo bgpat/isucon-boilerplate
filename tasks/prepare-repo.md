@@ -110,9 +110,3 @@ gh api "repos/${REPO}/collaborators" --jq '.[].login'
 - 接続情報の不足や権限エラーがない。
 - 競技開始後に初期準備 Issue を作成できる。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:

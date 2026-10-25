@@ -91,9 +91,3 @@ gh project view "$PROJECT_NUMBER" --owner "$OWNER" --web
 - チームメンバーが Project を利用できる。
 - 新しく作成した Issue と Pull Request を Project で管理できる。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:

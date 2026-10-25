@@ -149,9 +149,3 @@ git status --short /tmp/isucon-work/backup
 - アプリケーションコードや設定ファイルがバックアップ対象に含まれていない。
 - 復旧方法を確認できる。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:

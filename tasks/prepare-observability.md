@@ -122,9 +122,3 @@ ssh s1 'pkill prometheus; pkill node_exporter; pkill process-exporter; pkill gra
 - 監視停止はサーバー再起動で行える。
 - 計測機能を提出前に無効化する手順がある。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:

@@ -106,9 +106,3 @@ gh release view "$TAG" --repo "$REPO"
 - GitHub Release から対象 commit、変更内容、関連 Issue・PR、スコアを確認できる。
 - 推測や未確認事項が明示されている。
 
-# 作業後の記録
-
-- 実行日時:
-- 対象と実行結果:
-- 変更内容:
-- 関連 Issue / Pull Request / Release:
