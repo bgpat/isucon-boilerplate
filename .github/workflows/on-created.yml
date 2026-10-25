@@ -3,31 +3,50 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
+
+concurrency:
+  group: on-created-${{ github.repository }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
 jobs:
   on-created:
-    name: on-created
     runs-on: ubuntu-latest
     if: ${{ github.event.repository.is_template == false }}
     steps:
       - uses: actions/checkout@v4
-      - name: config git
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - name: Validate task templates
+        run: node .github/scripts/create-task-issues.cjs
+      - name: Create common task issues and dependencies
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { createTaskIssues } = require('./.github/scripts/create-task-issues.cjs');
+            core.info(await createTaskIssues({ github, context }));
+      - name: Initialize README
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
-          git config user.name $GITHUB_ACTOR
-          git config user.email $GITHUB_ACTOR@users.noreply.github.com
-          git remote set-url origin "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          git checkout master
-      - name: replace
-        run: |
-          sed -i "s/ isucon-boilerplate/ ${GITHUB_REPOSITORY#*/}/" README.md
-          sed -i "s!\\\$GITHUB_REPOSITORY!${GITHUB_REPOSITORY}!" README.md
-          sed -i 's/^\- \[ \] Create a new repository/- [x] Create a new repository/' README.md
-      - name: commit
-        run: git commit -am 'Replace $GITHUB_REPOSITORY'
-      - name: delete this script
-        run: |
-          rm -f .github/workflows/on-created.yml
-          git commit -am 'Delete on-created workflow'
-      - name: push
-        run: git push -f origin master
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          path = Path('README.md')
+          text = path.read_text()
+          text = text.replace('# isucon-boilerplate\n', '# ' + os.environ['GITHUB_REPOSITORY'].split('/')[1] + '\n', 1)
+          text = text.replace('$GITHUB_REPOSITORY', os.environ['GITHUB_REPOSITORY'])
+          text = text.replace('- [ ] Create a new repository', '- [x] Create a new repository')
+          path.write_text(text)
+          PY
+          if ! git diff --quiet -- README.md; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add README.md
+            git commit -m 'リポジトリの README を初期化する'
+            git push origin "HEAD:${DEFAULT_BRANCH}"
+          fi
