@@ -37,7 +37,7 @@ jobs:
           sed -i "1s/^# isucon-boilerplate$/# ${GITHUB_REPOSITORY#*/}/" README.md
           sed -i 's!\$GITHUB_REPOSITORY!'"$GITHUB_REPOSITORY"'!g' README.md
           sed -i 's/^- \[ \] Create a new repository/- [x] Create a new repository/' README.md
-          git rm -- tasks/*.md .github/scripts/create-task-issues.cjs .github/workflows/on-created.yml
+          git rm -- ':(glob)tasks/*.md' ':(exclude)tasks/README.md' .github/scripts/create-task-issues.cjs .github/workflows/on-created.yml
           git add README.md
           if ! git diff --cached --quiet; then
             git config user.name 'github-actions[bot]'
