@@ -70,7 +70,6 @@ front matter は `title`（文字列）、`labels` と `depends_on`（ブロッ�
 
 ```sh
 node .github/scripts/create-task-issues.cjs
-node --test .github/scripts/create-task-issues.test.cjs
 ```
 
 On Created は master への push と手動実行で動作し、テンプレートリポジトリでは実行しません。
