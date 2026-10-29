@@ -1,7 +1,7 @@
 ---
 title: "提出用ベンチマーク前に計測機能を無効化する"
+milestone: "06 競技終盤"
 labels:
-  - phase:final-check
   - type:observability
   - type:deployment
 depends_on:

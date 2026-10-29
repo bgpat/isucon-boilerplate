@@ -1,7 +1,7 @@
 ---
 title: "リポジトリを公開する"
+milestone: "07 競技終了後"
 labels:
-  - phase:after-competition
   - type:task
   - type:documentation
 depends_on:
