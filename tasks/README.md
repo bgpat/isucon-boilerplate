@@ -19,12 +19,11 @@
 3. 手順だけ作成する（実機・外部サービスには触れない）
 
 必要な情報:
-- サーバー名・役割・接続先:
-- 実行対象と範囲:
-- 実行してよい時間帯:
+- このタスク固有の前提・対象・判断に必要な項目のみ。
+- 例: レギュレーション確認は競技名と公式 URL。負荷実行は対象構成・許可範囲・時間帯。
 ```
 
-選択肢の回答がない場合は実行せず、Issue に不足情報を記録する。秘密情報そのものは受け取らず、認証方法または保管場所だけを確認する。
+既に許可された対象・範囲は再質問しない。本文にタスク固有の「ユーザー確認」がある場合はそれを使う。必要な回答がない場合は依存する操作を実行せず、Issue に不足情報を記録する。秘密情報そのものは受け取らず、認証方法または保管場所だけを確認する。
 
 計測データや図の一時ファイルは `/tmp/isucon-work/` などの一時領域に置き、リポジトリ直下に専用の成果物ディレクトリは作成しない。正式な要約・数値・判断理由は Issue、Pull Request、Release に記録する。
 
@@ -34,10 +33,10 @@
 
 ## Issue 化
 
-1. 対象ファイルの front matter から `title` と `labels` を確認する。
+1. 対象ファイルの front matter から `title`、`milestone`、`labels` を確認する。
 2. front matter の終了区切り `---` より後の内容を Issue 本文として使用する。
 3. 実施対象の競技、サーバー情報、関連タスクを追記する。
-4. `phase:*` と `type:*` の label を付けて Issue を作成する。`needs-user-action: true` の場合は `needs-user-action` label も付ける。
+4. `milestone` に対応する Milestone と `type:*` label を付けて Issue を作成する。`needs-user-action: true` の場合は `needs-user-action` label も付ける。
 
 各タスクの `depends_on` には、先に完了させるタスクのファイル名を記載する。
 依存関係がないタスクは `depends_on: []` とする。
@@ -48,15 +47,17 @@ Issue 化時には `depends_on` を依存先IssueへのGitHub Issue dependency�
 作成された「ISUCON 共通タスク」Issue の sub-issue として登録される。
 `depends_on` はsub-issueの親子関係ではなく、複数の依存先を表現できるIssue dependency（blocked by）として登録する。共通タスクのsub-issueの親を依存先へ変更してはならない。
 
-phase label は作業を行う時期を表す。
+時期は label ではなく、次の Milestone で管理する。
 
-- `phase:day-before` — 前日準備
-- `phase:just-before` — 競技直前
-- `phase:start` — 競技開始直後
-- `phase:early-competition` — 競技序盤
-- `phase:mid-competition` — 競技中盤
-- `phase:final-check` — 競技終盤
-- `phase:after-competition` — 競技終了後
+- `01 事前準備`
+- `02 競技直前`
+- `03 競技開始直後`
+- `04 競技序盤`
+- `05 競技中盤`
+- `06 競技終盤`
+- `07 競技終了後`
+
+初期化処理は7件をタイトルで照合して冪等に作成し、新規タスクに割り当てる。phase label は付与しない。既存 Issue は再実行で書き換えないため、旧 phase label からの移行が必要な既存リポジトリは別の移行作業として管理する。Project は Milestone 列と時期別ビューを用意する。
 
 タスク候補は問題固有のエンドポイント名、テーブル名、解答手順を含めない。
 問題固有の改善は、計測結果に基づいて競技中に個別の Issue として作成する。
@@ -64,7 +65,7 @@ phase label は作業を行う時期を表す。
 
 ## リポジトリ作成時の Issue 化と後片付け
 
-front matter は `title`（文字列）、`labels` と `depends_on`（ブロックリストまたは `[]`）、
+front matter は `title` と `milestone`（文字列）、`labels` と `depends_on`（ブロックリストまたは `[]`）、
 任意の `needs-user-action`（`true` / `false`）を使用します。任意の YAML 構文には対応しません。
 不明な依存先・循環依存・不正なメタデータは、Issue を作成する前にエラーになります。
 
@@ -89,3 +90,12 @@ commit・通常 push します。競技中は作成済み Issue で作業を管�
 Git push に失敗しても、リモートには初期化用ファイルが残るため、再実行で後片付けを完了できます。
 
 `tasks/README.md` は運用説明としてリポジトリに残します。
+
+## 作業の開始と完了
+
+- 事前準備の開始時に競技名・公式レギュレーション URL、通知受信確認の状況、Project 自動追加の設定方針をまとめて確認する。
+- Project で着手時は In Progress に更新し、完了時は Issue close と Done を確認する。Auto-add と着手状態の更新を混同しない。
+- 実施済み・未実施・ユーザーが明示した省略を記録して完了を判定する。ユーザー操作待ちを完了と偽らない。
+- 初回ベンチは `03 競技開始直後` でポータル確認・初期バックアップ取得後に実行する。追加計測の省略は初回についてユーザーと確認する。計測ありの2回目は別 Issue とし、計測導入の最小検証後に実行する。
+- 競技サーバーの未公開情報は事前準備の未完了理由にしない。接続情報は競技開始後の接続設定で受け取る。
+- 環境固有の情報は `knowledges/` と README、繰り返す採取・デプロイ手順は `ops/` に保存する。テンプレートに問題固有の解法や実測値を埋め込まない。

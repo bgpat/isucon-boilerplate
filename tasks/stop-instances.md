@@ -1,7 +1,7 @@
 ---
 title: "不要なインスタンスを停止する"
+milestone: "07 競技終了後"
 labels:
-  - phase:after-competition
   - type:infrastructure
   - type:deployment
 depends_on:

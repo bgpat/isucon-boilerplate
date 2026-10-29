@@ -1,7 +1,7 @@
 ---
 title: "競技結果を GitHub Release に記録する"
+milestone: "07 競技終了後"
 labels:
-  - phase:after-competition
   - type:documentation
   - type:task
 depends_on:
